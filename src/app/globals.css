@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand-cream: #FFFDF9;
+  --color-brand-terracotta: #D97757;
+  --color-brand-terracotta-hover: #C56545;
+  --color-brand-brown: #4A3B32;
+  --color-brand-gray: #6B5E55;
+  --color-brand-light-cream: #FAF6EE;
+  
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-inter);
+  --font-signature: var(--font-signature);
+}
+
+body {
+  background-color: var(--color-brand-cream);
+  color: var(--color-brand-brown);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
