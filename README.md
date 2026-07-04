@@ -1,57 +1,41 @@
-# 🍰 It's Tasty - Boutique Bakery
+<div align="center">
+  <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1000&auto=format&fit=crop" alt="It's Tasty" width="800" style="border-radius: 15px; margin-bottom: 20px;"/>
+  
+  <h1>🍰 It's Tasty - Boutique Bakery</h1>
+  
+  <p><strong>Kebahagiaan dalam Sekotak Kue.</strong></p>
+  
+  <p>
+    Kue bento ala Korea dan premium burnt cheesecake, dibuat khusus dengan bahan-bahan pilihan berkualitas tinggi untuk menyempurnakan setiap momen berharga Anda.
+  </p>
+  
+  <br />
+</div>
 
-Digital catalog and frontend for the It's Tasty boutique bakery. Built with Next.js App Router, Tailwind CSS, Framer Motion, and powered by Notion as a Headless CMS.
+## ✨ Tentang Kami
+Berawal dari kecintaan pada seni meracik rasa dan keindahan visual, **It's Tasty** hadir untuk membawa kebahagiaan kecil di setiap perayaanmu. Kami berfokus menghadirkan kue dengan sentuhan *artisanal*, tidak hanya cantik dipandang tetapi juga lumer dan memanjakan lidah di setiap gigitannya.
 
-## 🚀 Cara Menjalankan Website Secara Lokal
+## 🌟 Mengapa Memilih It's Tasty?
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+- **Bahan Premium (Premium Ingredients)**: Kami hanya menggunakan bahan-bahan segar berkualitas tinggi tanpa pengawet buatan.
+- **Desain Personal (Custom Designs)**: Bebas kreasikan desain bento cake impianmu, mulai dari minimalis hingga gaya yang penuh warna.
+- **Dibuat dengan Hati (Baked with Love)**: Setiap kue dipanggang di hari yang sama (*freshly baked*) dengan penuh ketelitian dan sentuhan personal.
 
-2. **Jalankan development server:**
-   ```bash
-   npm run dev
-   ```
-   Buka [http://localhost:3000](http://localhost:3000) pada browser Anda.
+## 🎂 Menu Unggulan Kami
 
----
-
-## 📝 Panduan Mengelola Katalog via Notion CMS
-
-Katalog produk pada website ini sepenuhnya dikendalikan melalui Database di Notion. Anda tidak perlu mengubah kode apapun untuk menambah, menghapus, atau mengedit produk yang tampil.
-
-### 1. Kolom / Properties Wajib di Notion
-Untuk memastikan website tidak error dan desain tetap proporsional, pastikan Database Notion Anda memiliki kolom (*Properties*) berikut persis dengan nama dan tipe ini (Case-Sensitive):
-
-| Nama Property di Notion | Tipe Property | Fungsi & Keterangan |
-| :--- | :--- | :--- |
-| **Name** | `Title` (Aa) | Nama produk (contoh: "Strawberry Shortcake Bento"). |
-| **Description** | `Text` | Penjelasan singkat produk untuk ditampilkan di bawah judul. |
-| **Image** | `Files & media` | Upload foto kue, atau *Embed* link gambar eksternal (rasio portrait direkomendasikan). |
-| **Price_10cm** | `Number` | Harga untuk ukuran 10cm, ketik angka saja tanpa Rp/titik. |
-| **Price_14cm** | `Number` | Harga untuk ukuran 14cm, ketik angka saja. |
-| **IsActive** | `Checkbox` | **Wajib dicentang** jika produk ingin dimunculkan di website. |
-| **IsBestseller** | `Checkbox` | Jika dicentang, produk akan mendapatkan tag eksklusif `"TERLARIS"`. |
-
-### 2. Cara Update & Tambah Menu
-1. Buka aplikasi Notion Anda dan masuk ke Database Katalog.
-2. Untuk **menambah produk**, klik `+ New` lalu isi setiap kolom.
-3. Untuk **menghapus sementara** produk yang sedang *Sold Out*, cukup **hapus centang** pada kolom `IsActive`.
-4. Perubahan akan langsung terlihat di website dalam waktu paling lambat 60 detik.
+Kunjungi katalog digital kami untuk menjelajahi berbagai pilihan menu spesial:
+1. **Korean Bento Cake** (Ukuran 10cm & 14cm) - Kue mungil cantik dengan desain *custom* yang sangat cocok untuk kejutan ulang tahun atau *anniversary*.
+2. **Premium Burnt Cheesecake** - Cheesecake khas Basque dengan tekstur lumer di dalam dan karamel eksotis di bagian luar.
 
 ---
 
-## 🚀 Cara Deploy ke Vercel (Gratis & Otomatis)
+### 🌐 Kunjungi Website Kami
+Lihat galeri karya terbaru kami, baca ulasan jujur dari para pelanggan setia, dan pesan kue impianmu sekarang juga secara *online*!
 
-Website ini dirancang khusus untuk berjalan sempurna di Vercel, yang secara otomatis menangani *server* dan koneksi ke Notion.
-
-1. **Upload Kode ke GitHub:** Buat repository baru di GitHub dan *push* semua kode proyek ini.
-2. **Import ke Vercel:** Login ke [Vercel](https://vercel.com/), buat *Project* baru, dan *import repository* GitHub tersebut.
-3. **Konfigurasi Environment Variables:** Sebelum klik Deploy, buka menu *Environment Variables* di Vercel dan wajib masukkan 2 variabel berikut:
-   - `NOTION_TOKEN` (Isi dengan Integration Token Notion Anda)
-   - `NOTION_DATABASE_ID` (Isi dengan ID Database Katalog Notion Anda)
-4. **Deploy:** Klik tombol Deploy dan tunggu 1-2 menit. Website Anda akan langsung online dan siap digunakan!
+👉 **[Kunjungi Website It's Tasty di Sini](https://project1-chi-two.vercel.app/)**
 
 ---
-*Crafted with love for It's Tasty.*
+
+<div align="center">
+  <i>© 2024 It's Tasty. Crafted with Love in Indonesia.</i>
+</div>
