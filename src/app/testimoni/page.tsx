@@ -107,7 +107,7 @@ export default function Testimoni() {
       >
         <h1 className="font-serif text-3xl md:text-5xl font-bold text-brand-brown">Cerita Manis Mereka</h1>
         <p className="text-brand-gray text-sm md:text-lg">
-          Setiap gigitan membawa kebahagiaan. Temukan pengalaman pelanggan kami menikmati kreasi artisanal dari It's Tasty.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </motion.div>
 
@@ -178,9 +178,9 @@ export default function Testimoni() {
         </motion.div>
 
         <motion.div variants={fadeInUp} className="flex-1 w-full bg-[#EAE3DB] rounded-2xl md:rounded-3xl p-6 md:p-14 flex flex-col gap-4 md:gap-6">
-          <h2 className="font-serif text-2xl md:text-4xl font-bold text-brand-brown leading-tight">Butuh Kue Spesial?</h2>
+          <h2 className="font-serif text-2xl md:text-4xl font-bold text-brand-brown leading-tight">Butuh Layanan Pesanan Lainnya?</h2>
           <p className="text-brand-gray text-xs md:text-base leading-relaxed">
-            Untuk perayaan, acara korporat, atau sekadar memanjakan diri. Tim kami siap meracik kreasi khusus untuk momen berharga Anda.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
           </p>
 
           <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm mt-2 md:mt-4 border border-brand-brown/5">
@@ -243,14 +243,14 @@ export default function Testimoni() {
               <Mail size={18} className="text-brand-gray shrink-0 mt-0.5" />
               <div>
                 <p className="text-[11px] font-semibold tracking-wider text-brand-gray/70 uppercase mb-0.5">Email Kami</p>
-                <p className="text-sm font-medium text-brand-brown">hello@itstasty.id</p>
+                <p className="text-sm font-medium text-brand-brown">-</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <MapPin size={18} className="text-brand-gray shrink-0 mt-0.5" />
               <div>
                 <p className="text-[11px] font-semibold tracking-wider text-brand-gray/70 uppercase mb-0.5">Kunjungi Toko</p>
-                <p className="text-sm font-medium text-brand-brown">Jl. Senopati No. 42, Jakarta</p>
+                <p className="text-sm font-medium text-brand-brown">-</p>
               </div>
             </div>
           </div>

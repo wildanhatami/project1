@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { Droplet, Heart, Palette, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -32,10 +32,10 @@ export default function TentangKami() {
           </motion.h1>
           <motion.div variants={fadeInUp} className="w-12 md:w-16 h-1 bg-brand-terracotta/30 rounded-full my-1 md:my-2" />
           <motion.p variants={fadeInUp} className="text-brand-gray text-sm md:text-lg leading-relaxed">
-            Berawal dari kecintaan pada seni meracik rasa dan keindahan visual, It's Tasty hadir untuk membawa kebahagiaan kecil di setiap perayaanmu.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
           </motion.p>
           <motion.p variants={fadeInUp} className="text-brand-gray text-sm md:text-lg leading-relaxed">
-            Kami fokus menghadirkan Bento Cake ala Korea dan Premium Burnt Cheesecake yang tidak hanya cantik dipandang, tapi juga lumer di mulut. Setiap kue dipanggang setiap hari dengan bahan-bahan premium pilihan dan sentuhan personal.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           </motion.p>
         </motion.div>
 
@@ -52,47 +52,6 @@ export default function TentangKami() {
               className="object-cover w-full h-full hover:scale-105 transition-transform duration-[1.5s]"
             />
           </div>
-        </motion.div>
-      </section>
-
-      {/* Core Values Section */}
-      <section className="w-full bg-[#FAF6EE] py-16 md:py-24 mb-16 md:mb-20 border-y border-brand-brown/5">
-        <motion.div 
-          className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10"
-          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
-        >
-          {/* Value 1 */}
-          <motion.div variants={fadeInUp} className="bg-white rounded-3xl p-8 md:p-10 flex flex-col items-center text-center shadow-sm border border-brand-brown/5 hover:shadow-md transition-shadow duration-300">
-            <div className="w-12 h-12 md:w-16 md:h-16 bg-[#F4EDE4] rounded-2xl flex items-center justify-center text-brand-brown mb-4 md:mb-6">
-              <Droplet className="w-6 h-6 md:w-7 md:h-7" strokeWidth={1.5} />
-            </div>
-            <h3 className="font-serif text-xl md:text-2xl font-medium text-brand-brown mb-2 md:mb-3">Bahan Premium</h3>
-            <p className="text-brand-gray text-xs md:text-[15px] leading-relaxed">
-              Hanya menggunakan butter, cream, dan cokelat berkualitas tinggi untuk tekstur dan rasa terbaik.
-            </p>
-          </motion.div>
-
-          {/* Value 2 */}
-          <motion.div variants={fadeInUp} className="bg-white rounded-3xl p-8 md:p-10 flex flex-col items-center text-center shadow-sm border border-brand-brown/5 hover:shadow-md transition-shadow duration-300">
-            <div className="w-12 h-12 md:w-16 md:h-16 bg-[#F4EDE4] rounded-2xl flex items-center justify-center text-brand-brown mb-4 md:mb-6">
-              <Heart className="w-6 h-6 md:w-7 md:h-7" strokeWidth={1.5} />
-            </div>
-            <h3 className="font-serif text-xl md:text-2xl font-medium text-brand-brown mb-2 md:mb-3">Dibuat dengan Cinta</h3>
-            <p className="text-brand-gray text-xs md:text-[15px] leading-relaxed">
-              100% homemade, dipanggang setiap hari untuk memastikan kesegaran di setiap gigitan.
-            </p>
-          </motion.div>
-
-          {/* Value 3 */}
-          <motion.div variants={fadeInUp} className="bg-white rounded-3xl p-8 md:p-10 flex flex-col items-center text-center shadow-sm border border-brand-brown/5 hover:shadow-md transition-shadow duration-300">
-            <div className="w-12 h-12 md:w-16 md:h-16 bg-[#F4EDE4] rounded-2xl flex items-center justify-center text-brand-brown mb-4 md:mb-6">
-              <Palette className="w-6 h-6 md:w-7 md:h-7" strokeWidth={1.5} />
-            </div>
-            <h3 className="font-serif text-xl md:text-2xl font-medium text-brand-brown mb-2 md:mb-3">Desain Personal</h3>
-            <p className="text-brand-gray text-xs md:text-[15px] leading-relaxed">
-              Bebas kreasikan desain bento cake impianmu untuk momen yang tak terlupakan.
-            </p>
-          </motion.div>
         </motion.div>
       </section>
 
