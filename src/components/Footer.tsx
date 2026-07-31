@@ -38,7 +38,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Brand signature */}
         <div className="flex items-center gap-3">
-          <span className="font-signature text-2xl text-brand-terracotta">It's Tasty</span>
+          <span className="font-signature text-2xl text-brand-terracotta">It&apos;s Tasty</span>
         </div>
 
         {/* Social Links & Location Pills */}

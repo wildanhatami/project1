@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { motion, Variants } from "framer-motion";
-import { Send } from "lucide-react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import { ShoppingBag } from "lucide-react";
 import { Product } from "@/lib/notion";
+import CheckoutModal from "./CheckoutModal";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -12,14 +13,12 @@ const fadeInUp: Variants = {
 
 export default function ProductCard({ product }: { product: Product }) {
   const [selectedSizeIdx, setSelectedSizeIdx] = useState(0);
-  
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+
   // Safely fallback if sizes array is somehow empty
   const selectedSize = product.sizes[selectedSizeIdx] || { size: "10cm", price: 0 };
 
-  const waNumber = "6285718314942";
   const formattedPrice = selectedSize.price.toLocaleString("id-ID");
-  const waText = `Halo Admin It's Tasty, saya mau pesan ${product.name} ukuran ${selectedSize.size} seharga Rp ${formattedPrice}`;
-  const waHref = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
 
   return (
     <motion.div variants={fadeInUp} className="flex flex-col group h-full">
@@ -68,18 +67,26 @@ export default function ProductCard({ product }: { product: Product }) {
           Rp {formattedPrice}
         </p>
 
-        {/* WhatsApp Button */}
-        <a
-          href={waHref}
-          target="_blank"
-          rel="noopener noreferrer"
+        {/* Order Button -> Checkout Modal */}
+        <button
+          onClick={() => setCheckoutOpen(true)}
           className="w-full flex items-center justify-center gap-1.5 md:gap-2 bg-brand-terracotta hover:bg-brand-terracotta-hover text-white font-medium py-2 md:py-3.5 rounded-lg md:rounded-xl transition-all hover:scale-[1.02] active:scale-95 shadow-sm text-[11px] md:text-base"
         >
-          <Send className="w-3.5 h-3.5 md:w-5 md:h-5" />
-          <span className="hidden md:inline">Pesan via WhatsApp</span>
+          <ShoppingBag className="w-3.5 h-3.5 md:w-5 md:h-5" />
+          <span className="hidden md:inline">Pesan Sekarang</span>
           <span className="md:hidden">Pesan</span>
-        </a>
+        </button>
       </div>
+
+      <AnimatePresence>
+        {checkoutOpen && (
+          <CheckoutModal
+            product={product}
+            selectedSizeIdx={selectedSizeIdx}
+            onClose={() => setCheckoutOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

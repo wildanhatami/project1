@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins, Playfair_Display, Sacramento } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Providers from "@/components/Providers";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -26,6 +27,12 @@ export const metadata: Metadata = {
   description: "Kebahagiaan dalam Sekotak Kue. Kue bento ala Korea dan burnt cheesecake premium.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,14 +41,16 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${poppins.variable} ${playfair.variable} ${sacramento.variable} antialiased`}>
       <body className="min-h-screen flex flex-col font-sans text-brand-brown bg-brand-cream selection:bg-brand-terracotta selection:text-white">
-        <Navbar />
+        <Providers>
+          <Navbar />
 
-        {/* Main Content */}
-        <main className="flex-grow">
-          {children}
-        </main>
+          {/* Main Content */}
+          <main className="flex-grow">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

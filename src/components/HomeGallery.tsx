@@ -25,6 +25,7 @@ const FALLBACK_PRODUCTS: Product[] = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?q=80&w=800&auto=format&fit=crop",
     isBestseller: false,
+    isActive: true,
     sizes: [{ size: "14cm", price: 185000 }],
   },
   {
@@ -33,6 +34,7 @@ const FALLBACK_PRODUCTS: Product[] = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     image: "https://images.unsplash.com/photo-1621236378699-8597faf6a176?q=80&w=800&auto=format&fit=crop",
     isBestseller: true,
+    isActive: true,
     sizes: [{ size: "10cm", price: 95000 }],
   },
   {
@@ -41,6 +43,7 @@ const FALLBACK_PRODUCTS: Product[] = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     image: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?q=80&w=800&auto=format&fit=crop",
     isBestseller: false,
+    isActive: true,
     sizes: [{ size: "10cm", price: 95000 }],
   },
   {
@@ -49,6 +52,7 @@ const FALLBACK_PRODUCTS: Product[] = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     image: "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=80&w=800&auto=format&fit=crop",
     isBestseller: false,
+    isActive: true,
     sizes: [{ size: "14cm", price: 210000 }],
   },
 ];

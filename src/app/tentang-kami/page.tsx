@@ -3,7 +3,6 @@
 import { motion, Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -28,7 +27,7 @@ export default function TentangKami() {
           initial="hidden" animate="visible" variants={staggerContainer}
         >
           <motion.h1 variants={fadeInUp} className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-brand-brown leading-[1.1]">
-            Kisah di Balik <br className="hidden md:block" /> It's Tasty
+            Kisah di Balik <br className="hidden md:block" /> It&apos;s Tasty
           </motion.h1>
           <motion.div variants={fadeInUp} className="w-12 md:w-16 h-1 bg-brand-terracotta/30 rounded-full my-1 md:my-2" />
           <motion.p variants={fadeInUp} className="text-brand-gray text-sm md:text-lg leading-relaxed">
@@ -62,7 +61,7 @@ export default function TentangKami() {
           initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
         >
           <h2 className="font-serif text-lg md:text-5xl font-bold text-brand-brown mb-5 md:mb-8 max-w-2xl leading-snug md:leading-tight">
-            Mari rayakan momen spesialmu bersama It's Tasty.
+            Mari rayakan momen spesialmu bersama It&apos;s Tasty.
           </h2>
           <Link 
             href="/katalog"

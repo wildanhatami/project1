@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { Star, MessageSquare, Mail, MapPin, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
 
 const testimonials = [
   {
@@ -153,7 +152,7 @@ export default function Testimoni() {
               </div>
               
               <p className="italic text-brand-gray text-[14px] md:text-[15px] leading-relaxed flex-grow mb-8 whitespace-normal">
-                "{t.text}"
+                &quot;{t.text}&quot;
               </p>
 
               <p className="text-[11px] font-semibold tracking-wider text-brand-gray/60 uppercase">

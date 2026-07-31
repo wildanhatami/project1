@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#ffffff"/>
+  <!-- Fake QR finder patterns (3 corners) -->
+  <g fill="#1a1a1a">
+    <rect x="40" y="40" width="120" height="120" fill="#1a1a1a"/>
+    <rect x="56" y="56" width="88" height="88" fill="#ffffff"/>
+    <rect x="72" y="72" width="56" height="56" fill="#1a1a1a"/>
+    <rect x="352" y="40" width="120" height="120" fill="#1a1a1a"/>
+    <rect x="368" y="56" width="88" height="88" fill="#ffffff"/>
+    <rect x="384" y="72" width="56" height="56" fill="#1a1a1a"/>
+    <rect x="40" y="352" width="120" height="120" fill="#1a1a1a"/>
+    <rect x="56" y="368" width="88" height="88" fill="#ffffff"/>
+    <rect x="72" y="384" width="56" height="56" fill="#1a1a1a"/>
+  </g>
+  <!-- Fake QR data modules -->
+  <g fill="#2a2a2a">
+    <rect x="176" y="48" width="24" height="24"/>
+    <rect x="208" y="80" width="24" height="24"/>
+    <rect x="248" y="48" width="24" height="24"/>
+    <rect x="280" y="80" width="24" height="24"/>
+    <rect x="312" y="48" width="24" height="24"/>
+    <rect x="184" y="120" width="24" height="24"/>
+    <rect x="248" y="112" width="24" height="24"/>
+    <rect x="288" y="136" width="24" height="24"/>
+    <rect x="176" y="176" width="24" height="24"/>
+    <rect x="216" y="184" width="24" height="24"/>
+    <rect x="264" y="176" width="24" height="24"/>
+    <rect x="312" y="192" width="24" height="24"/>
+    <rect x="192" y="232" width="24" height="24"/>
+    <rect x="248" y="240" width="24" height="24"/>
+    <rect x="288" y="232" width="24" height="24"/>
+    <rect x="328" y="248" width="24" height="24"/>
+    <rect x="176" y="288" width="24" height="24"/>
+    <rect x="216" y="296" width="24" height="24"/>
+    <rect x="264" y="288" width="24" height="24"/>
+    <rect x="312" y="296" width="24" height="24"/>
+    <rect x="184" y="328" width="24" height="24"/>
+    <rect x="248" y="336" width="24" height="24"/>
+    <rect x="296" y="328" width="24" height="24"/>
+    <rect x="336" y="336" width="24" height="24"/>
+    <rect x="176" y="376" width="24" height="24"/>
+    <rect x="208" y="400" width="24" height="24"/>
+    <rect x="248" y="376" width="24" height="24"/>
+    <rect x="288" y="400" width="24" height="24"/>
+    <rect x="328" y="376" width="24" height="24"/>
+    <rect x="192" y="424" width="24" height="24"/>
+    <rect x="248" y="432" width="24" height="24"/>
+    <rect x="296" y="424" width="24" height="24"/>
+    <rect x="336" y="432" width="24" height="24"/>
+  </g>
+  <!-- Center badge -->
+  <g>
+    <rect x="196" y="196" width="120" height="120" rx="16" fill="#D97757"/>
+    <text x="256" y="238" font-family="Georgia, serif" font-size="22" fill="#ffffff" text-anchor="middle" font-weight="bold">It's Tasty</text>
+    <text x="256" y="268" font-family="Arial, sans-serif" font-size="14" fill="#fff5ee" text-anchor="middle">QRIS</text>
+    <text x="256" y="292" font-family="Arial, sans-serif" font-size="10" fill="#fff5ee" text-anchor="middle">GANTI DENGAN QRIS ASLI</text>
+  </g>
+</svg>

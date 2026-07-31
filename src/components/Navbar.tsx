@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, MessageSquare, MapPin } from "lucide-react";
+import { Menu, X, MessageSquare, MapPin, LogOut, LayoutDashboard, User } from "lucide-react";
 
 const InstagramIcon = ({ size = 14, className = "" }: { size?: number; className?: string }) => (
   <svg 
@@ -39,6 +40,9 @@ const TikTokIcon = ({ size = 14, className = "" }: { size?: number; className?: 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === "authenticated";
+  const isAdmin = session?.user?.role === "admin";
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -78,7 +82,7 @@ export default function Navbar() {
           onClick={closeMenu}
           className="font-signature text-3xl md:text-4xl text-brand-terracotta z-50"
         >
-          It's Tasty
+          It&apos;s Tasty
         </Link>
         
         {/* Desktop Links */}
@@ -104,8 +108,41 @@ export default function Navbar() {
           })}
         </div>
         
-        <div className="w-24 hidden md:block">
-          {/* Spacer for desktop layout balance */}
+        {/* Desktop Session / Auth */}
+        <div className="hidden md:flex items-center gap-3 w-24 justify-end">
+          {isLoggedIn ? (
+            <>
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className={`flex items-center gap-1.5 text-xs font-semibold py-1.5 px-3 rounded-full transition-colors ${
+                    pathname.startsWith("/admin")
+                      ? "bg-brand-terracotta text-white"
+                      : "bg-brand-brown/5 text-brand-brown hover:bg-brand-brown/10"
+                  }`}
+                >
+                  <LayoutDashboard size={13} />
+                  Admin
+                </Link>
+              )}
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="flex items-center gap-1.5 text-xs font-semibold text-brand-gray hover:text-brand-terracotta transition-colors"
+                title={`Keluar (${session?.user?.name ?? ""})`}
+              >
+                <LogOut size={14} />
+                Keluar
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center gap-1.5 text-xs font-semibold text-brand-brown hover:text-brand-terracotta transition-colors"
+            >
+              <User size={14} />
+              Masuk
+            </Link>
+          )}
         </div>
 
         {/* Mobile Toggle Button */}
@@ -162,8 +199,46 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ delay: links.length * 0.05 + 0.1, duration: 0.3, ease: "easeOut" }}
-                className="pt-4 w-full max-w-xs"
+                className="pt-4 w-full max-w-xs flex flex-col gap-2"
               >
+                {isLoggedIn ? (
+                  <>
+                    <div className="flex items-center justify-center gap-2 text-sm text-brand-gray mb-1">
+                      <span className="w-8 h-8 rounded-full bg-brand-terracotta/15 flex items-center justify-center">
+                        <User size={15} className="text-brand-terracotta" />
+                      </span>
+                      <span className="font-medium text-brand-brown truncate max-w-[200px]">
+                        {session?.user?.name}
+                      </span>
+                    </div>
+                    {isAdmin && (
+                      <Link
+                        href="/admin"
+                        onClick={closeMenu}
+                        className="w-full flex items-center justify-center gap-2 bg-white border border-brand-brown/15 text-brand-brown font-medium py-3 px-6 rounded-full transition-all shadow-sm active:scale-95 text-sm"
+                      >
+                        <LayoutDashboard size={16} />
+                        <span>Dashboard Admin</span>
+                      </Link>
+                    )}
+                    <button
+                      onClick={() => signOut({ callbackUrl: "/" })}
+                      className="w-full flex items-center justify-center gap-2 bg-white border border-brand-brown/15 text-brand-gray font-medium py-3 px-6 rounded-full transition-all shadow-sm active:scale-95 text-sm"
+                    >
+                      <LogOut size={16} />
+                      <span>Keluar</span>
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href="/login"
+                    onClick={closeMenu}
+                    className="w-full flex items-center justify-center gap-2 bg-white border border-brand-brown/15 text-brand-brown font-medium py-3 px-6 rounded-full transition-all shadow-sm active:scale-95 text-sm"
+                  >
+                    <User size={16} />
+                    <span>Masuk</span>
+                  </Link>
+                )}
                 <a
                   href="https://wa.me/6285718314942?text=Halo%20Admin%20It's%20Tasty,%20saya%20mau%20konsultasi%20pesanan%20kue"
                   target="_blank"
