@@ -299,6 +299,7 @@ export default function CheckoutModal({
                             alt={item.productName}
                             width={48}
                             height={48}
+                            style={{ width: "auto", height: "auto" }}
                             className="rounded-xl object-cover shrink-0 w-12 h-12"
                           />
                         ) : (
@@ -434,6 +435,7 @@ export default function CheckoutModal({
                             alt="QRIS It's Tasty"
                             width={96}
                             height={96}
+                            style={{ width: "auto", height: "auto" }}
                             className="rounded-xl border border-brand-brown/10 object-cover group-hover:scale-105 transition-transform"
                           />
                           <span className="absolute inset-0 rounded-xl bg-brand-brown/0 group-hover:bg-brand-brown/10 transition-colors flex items-center justify-center">
@@ -595,6 +597,7 @@ export default function CheckoutModal({
                 alt="QRIS It's Tasty"
                 width={224}
                 height={224}
+                style={{ width: "auto", height: "auto" }}
                 className="mx-auto rounded-2xl border border-brand-brown/10 object-cover"
               />
               <p className="text-sm text-brand-gray mt-4 leading-relaxed">

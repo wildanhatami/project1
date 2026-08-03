@@ -46,6 +46,9 @@ export default function Navbar() {
   const isAdmin = session?.user?.role === "admin";
   const { getTotalItems, openCart } = useCart();
 
+  const isAdminRoute = pathname.startsWith("/admin");
+  if (isAdminRoute) return null;
+
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 

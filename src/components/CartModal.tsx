@@ -78,6 +78,7 @@ export default function CartModal() {
                         alt={item.productName}
                         width={64}
                         height={64}
+                        style={{ width: "auto", height: "auto" }}
                         className="rounded-xl object-cover shrink-0 w-16 h-16 md:w-20 md:h-20"
                       />
                     ) : (

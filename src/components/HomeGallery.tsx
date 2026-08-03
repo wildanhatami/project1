@@ -98,8 +98,13 @@ export default function HomeGallery({ products }: { products: Product[] }) {
                   src={product.image || "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop"}
                   alt={product.name}
                   fill
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Y3ZjNlZSIgLz48L3N2Zz4="
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 50vw, 50vw"
+                  priority={idx === 0}
+                  loading={idx === 0 ? undefined : "lazy"}
                 />
               </div>
               <div className="text-center md:text-left px-1">
@@ -130,8 +135,12 @@ export default function HomeGallery({ products }: { products: Product[] }) {
                   src={product.image || "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop"}
                   alt={product.name}
                   fill
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Y3ZjNlZSIgLz48L3N2Zz4="
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 50vw, 50vw"
+                  loading="lazy"
                 />
               </div>
               <div className="text-center md:text-left px-1">

@@ -62,9 +62,12 @@ export default function HomeHero() {
                 src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1000&auto=format&fit=crop"
                 alt="Hero Cake"
                 fill
+                quality={85}
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjEwMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSIjZjdmM2VlIiAvPjwvc3ZnPg=="
                 className="object-cover w-full h-full"
                 priority
-                sizes="100vw"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
           </div>
         </div>

@@ -42,6 +42,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
             alt={t.name}
             width={48}
             height={48}
+            style={{ width: "auto", height: "auto" }}
             className="rounded-full object-cover"
             sizes="48px"
           />

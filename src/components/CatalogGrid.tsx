@@ -42,7 +42,7 @@ export default function CatalogGrid({ products }: { products: Product[] }) {
   return (
     <div className="w-full flex flex-col items-center">
       <motion.div 
-        className="w-full max-w-7xl px-4 md:px-8 lg:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 gap-y-10 lg:gap-y-12 mb-20"
+        className="w-full max-w-7xl px-3 sm:px-6 md:px-8 lg:px-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8 gap-y-6 sm:gap-y-10 lg:gap-y-12 mb-16 md:mb-20"
         initial="hidden" animate="visible" variants={staggerContainer}
         key={currentPage} // This key forces framer-motion to re-animate when page changes
       >

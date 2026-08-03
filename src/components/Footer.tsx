@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { MapPin } from "lucide-react";
 import { STORE_ADDRESS, STORE_MAPS_URL } from "@/lib/store-config";
 
@@ -32,6 +35,8 @@ const TikTokIcon = ({ size = 16, className = "" }: { size?: number; className?: 
 );
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/admin")) return null;
   return (
     <footer className="w-full bg-brand-light-cream py-6 md:py-8 px-6 md:px-16 mt-12 md:mt-20 border-t border-brand-brown/10">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">

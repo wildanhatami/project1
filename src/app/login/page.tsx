@@ -29,8 +29,10 @@ const GoogleIcon = () => (
 
 function LoginContent() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const rawCallbackUrl = searchParams.get("callbackUrl") || "/";
   const error = searchParams.get("error");
+
+  const targetCallbackUrl = `/api/auth/redirect?callbackUrl=${encodeURIComponent(rawCallbackUrl)}`;
 
   return (
     <div className="min-h-screen bg-brand-cream flex items-center justify-center px-4">
@@ -81,7 +83,7 @@ function LoginContent() {
             id="google-login-btn"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => signIn("google", { callbackUrl })}
+            onClick={() => signIn("google", { callbackUrl: targetCallbackUrl })}
             className="w-full flex items-center justify-center gap-3 bg-white border-2 border-brand-brown/15 hover:border-brand-terracotta/40 hover:bg-brand-cream text-brand-brown font-medium py-3.5 px-6 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md group"
           >
             <GoogleIcon />
