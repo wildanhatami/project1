@@ -2,6 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -49,7 +50,7 @@ export default function HomeHero() {
         </motion.div>
       </motion.div>
       
-      <motion.div 
+<motion.div 
         className="flex-1 w-full relative"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -57,11 +58,14 @@ export default function HomeHero() {
       >
         <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
           <div className="w-full h-full bg-brand-brown/10 relative">
-             <img 
-               src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1000&auto=format&fit=crop" 
-               alt="Hero Cake" 
-               className="object-cover w-full h-full"
-             />
+             <Image
+                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1000&auto=format&fit=crop"
+                alt="Hero Cake"
+                fill
+                className="object-cover w-full h-full"
+                priority
+                sizes="100vw"
+              />
           </div>
         </div>
       </motion.div>

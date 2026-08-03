@@ -7,8 +7,8 @@
 export const WA_NUMBER = "6285718314942";
 
 /** Alamat toko (link Google Maps) */
-export const STORE_ADDRESS = "Sepatan, Tangerang";
-export const STORE_MAPS_URL = "https://maps.app.goo.gl/bXF7b72Saev6xNsz9";
+export const STORE_ADDRESS = "Jl. Ahmad Yani Kp. Sarakan RT 002/003, Pisangan Jaya, Sepatan, Tangerang Regency, Banten 15520";
+export const STORE_MAPS_URL = "https://maps.app.goo.gl/i5syToFi6SGK4HsH9?g_st=aw";
 
 /** Jadwal operasional toko untuk opsi "Datang Langsung ke Toko" */
 export const STORE_SCHEDULE = {
@@ -21,21 +21,21 @@ export const STORE_SCHEDULE = {
  * Metode pembayaran.
  *
  * QRIS_IMAGE: letakkan gambar QRIS asli Anda di folder `public/`
- * (misalnya `public/qris-itstasty.png`), lalu ganti path di bawah ini.
+ * (misalnya `public/QRIS.png`), lalu ganti path di bawah ini.
  */
 export const PAYMENT_METHODS = {
   qris: {
     label: "QRIS",
     description: "Scan QRIS di bawah ini menggunakan aplikasi pembayaran apa pun (GoPay, OVO, DANA, ShopeePay, mobile banking, dll.)",
-    imagePath: "/qris-placeholder.svg",
+    imagePath: "/QRIS.png",
   },
   ewallet: {
     label: "E-Wallet",
     description: "Transfer ke salah satu e-wallet di bawah ini, lalu konfirmasi pembayaran.",
     accounts: [
-      { name: "DANA", number: "08XX-XXXX-XXXX", holder: "a.n. It's Tasty" },
-      { name: "OVO", number: "08XX-XXXX-XXXX", holder: "a.n. It's Tasty" },
-      { name: "GoPay", number: "08XX-XXXX-XXXX", holder: "a.n. It's Tasty" },
+      { name: "DANA", number: "085718314942", holder: "a.n. It's Tasty" },
+      { name: "OVO", number: "085718314942", holder: "a.n. It's Tasty" },
+      { name: "GoPay", number: "085718314942", holder: "a.n. It's Tasty" },
     ],
   },
   bank: {

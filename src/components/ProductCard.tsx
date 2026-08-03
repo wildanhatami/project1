@@ -5,6 +5,7 @@ import { motion, AnimatePresence, Variants } from "framer-motion";
 import { ShoppingBag } from "lucide-react";
 import { Product } from "@/lib/notion";
 import CheckoutModal from "./CheckoutModal";
+import Image from "next/image";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -22,17 +23,20 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <motion.div variants={fadeInUp} className="flex flex-col group h-full">
-      <div className="overflow-hidden rounded-xl md:rounded-2xl w-full aspect-[4/5] bg-brand-brown/5 relative mb-3 md:mb-6">
+<div className="overflow-hidden rounded-xl md:rounded-2xl w-full aspect-[4/5] bg-brand-brown/5 relative mb-3 md:mb-6">
         {product.isBestseller && (
           <div className="absolute top-2 left-2 md:top-4 md:left-4 bg-brand-light-cream text-brand-terracotta text-[9px] md:text-xs font-bold px-2 py-0.5 md:px-3 md:py-1 rounded-full z-10 shadow-sm uppercase tracking-wider">
             Terlaris
           </div>
         )}
         {product.image ? (
-          <img 
-            src={product.image} 
-            alt={product.name} 
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            priority
           />
         ) : (
           <div className="w-full h-full bg-brand-brown/10 flex items-center justify-center text-brand-gray text-xs md:text-sm">No Image</div>

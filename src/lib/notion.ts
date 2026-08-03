@@ -257,3 +257,79 @@ export async function deleteProduct(
     return { ok: false, error: errorMessage(error, "Gagal menghapus produk") };
   }
 }
+
+export interface CreateProductInput {
+  name: string;
+  description?: string;
+  isActive?: boolean;
+  isBestseller?: boolean;
+  sizes?: SizeOption[];
+  image?: File;
+}
+
+/**
+ * Buat produk baru di database Notion.
+ */
+export async function createProduct(
+  data: CreateProductInput
+): Promise<{ ok: boolean; error?: string; id?: string }> {
+  try {
+    const databaseId = process.env.NOTION_DATABASE_ID;
+    if (!databaseId) {
+      return { ok: false, error: "NOTION_DATABASE_ID tidak dikonfigurasi" };
+    }
+
+    const sizes = data.sizes
+      ?.filter((s) => s.size.trim() && !isNaN(s.price))
+      .map((s) => ({ size: s.size.trim(), price: Number(s.price) })) ?? [];
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const properties: Record<string, any> = {
+      Name: {
+        title: [{ text: { content: data.name } }],
+      },
+      IsActive: { checkbox: data.isActive ?? true },
+      IsBestseller: { checkbox: data.isBestseller ?? false },
+    };
+
+    if (data.description) {
+      properties.Description = {
+        rich_text: [{ text: { content: data.description } }],
+      };
+    }
+
+    if (sizes.length > 0) {
+      properties.Sizes = {
+        rich_text: [{ text: { content: JSON.stringify(sizes) } }],
+      };
+
+      const price10 = sizes.find((s) => s.size === "10cm")?.price;
+      const price14 = sizes.find((s) => s.size === "14cm")?.price;
+      properties.Price_10cm = { number: price10 ?? null };
+      properties.Price_14cm = { number: price14 ?? null };
+    }
+
+    const response = await notion.pages.create({
+      parent: { data_source_id: databaseId },
+      properties,
+    });
+
+    // Jika ada gambar, upload setelah halaman dibuat
+    if (data.image && response.id) {
+      const formData = new FormData();
+      formData.append("file", data.image);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/admin/products/${response.id}/image`,
+        { method: "POST", body: formData }
+      );
+      if (!res.ok) {
+        console.warn("[notion] createProduct: gagal upload gambar, produk tetap dibuat");
+      }
+    }
+
+    return { ok: true, id: response.id };
+  } catch (error) {
+    console.error("[notion] createProduct error:", error);
+    return { ok: false, error: errorMessage(error, "Gagal membuat produk") };
+  }
+}

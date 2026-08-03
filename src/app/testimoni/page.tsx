@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { Star, MessageSquare, Mail, MapPin, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -140,7 +141,13 @@ export default function Testimoni() {
               className="bg-white p-5 md:p-8 rounded-2xl shadow-sm border border-brand-brown/5 flex flex-col w-[80vw] max-w-[300px] md:max-w-none md:w-[420px] snap-start hover:shadow-md transition-shadow duration-300 shrink-0"
             >
               <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-                <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover" />
+                <Image
+                  src={t.avatar}
+                  alt={t.name}
+                  width={48}
+                  height={48}
+                  className="rounded-full object-cover"
+                />
                 <div>
                   <h3 className="font-medium text-brand-brown text-sm md:text-base">{t.name}</h3>
                   <div className="flex gap-1 mt-1 text-brand-terracotta">
@@ -168,11 +175,13 @@ export default function Testimoni() {
         className="w-full max-w-6xl px-4 md:px-16 flex flex-col lg:flex-row gap-8 md:gap-12 items-center"
         initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
       >
-        <motion.div variants={fadeInUp} className="flex-1 w-full relative aspect-[4/3] lg:aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-lg">
-          <img 
-            src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?q=80&w=1000&auto=format&fit=crop" 
-            alt="Custom Cakes Selection" 
+<motion.div variants={fadeInUp} className="flex-1 w-full relative aspect-[4/3] lg:aspect-square rounded-2xl md:rounded-3xl overflow-hidden shadow-lg">
+          <Image
+            src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?q=80&w=1000&auto=format&fit=crop"
+            alt="Custom Cakes Selection"
+            fill
             className="object-cover w-full h-full"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </motion.div>
 

@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -44,11 +45,13 @@ export default function TentangKami() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="relative w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] rounded-[2rem] overflow-hidden shadow-xl border border-brand-brown/5">
-            <img 
-              src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1000&auto=format&fit=crop" 
-              alt="Baker piping frosting on a cake" 
+<div className="relative w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] rounded-[2rem] overflow-hidden shadow-xl border border-brand-brown/5">
+            <Image
+              src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1000&auto=format&fit=crop"
+              alt="Baker piping frosting on a cake"
+              fill
               className="object-cover w-full h-full hover:scale-105 transition-transform duration-[1.5s]"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </motion.div>

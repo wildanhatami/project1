@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Package, Eye, EyeOff, Users, ArrowRight } from "lucide-react";
 import { getAllProducts } from "@/lib/notion";
 
@@ -87,10 +88,12 @@ export default async function AdminDashboard() {
             {products.slice(0, 5).map((product) => (
               <div key={product.id} className="flex items-center gap-4 py-3">
                 {product.image ? (
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
-                    className="w-12 h-12 rounded-xl object-cover bg-brand-brown/5"
+                    width={48}
+                    height={48}
+                    className="rounded-xl object-cover"
                   />
                 ) : (
                   <div className="w-12 h-12 rounded-xl bg-brand-brown/5 flex items-center justify-center text-brand-gray text-xs">

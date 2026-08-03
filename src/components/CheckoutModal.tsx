@@ -24,6 +24,7 @@ import {
   STORE_ADDRESS,
   PAYMENT_METHODS,
 } from "@/lib/store-config";
+import Image from "next/image";
 
 type OrderMethod = "preorder" | "instore";
 type PaymentMethod = "qris" | "ewallet" | "bank";
@@ -136,10 +137,12 @@ export default function CheckoutModal({
                 {/* Ringkasan Produk */}
                 <div className="flex items-center gap-3 md:gap-4 bg-brand-light-cream rounded-2xl p-3 md:p-4">
                   {product.image ? (
-                    <img
+                    <Image
                       src={product.image}
                       alt={product.name}
-                      className="w-14 h-14 md:w-16 md:h-16 rounded-xl object-cover shrink-0"
+                      width={56}
+                      height={56}
+                      className="rounded-xl object-cover shrink-0"
                     />
                   ) : (
                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-brand-brown/10 flex items-center justify-center text-brand-gray text-xs shrink-0">
@@ -257,10 +260,12 @@ export default function CheckoutModal({
                           className="relative shrink-0 group"
                           title="Klik untuk memperbesar"
                         >
-                          <img
+                          <Image
                             src={PAYMENT_METHODS.qris.imagePath}
                             alt="QRIS It's Tasty"
-                            className="w-24 h-24 rounded-xl border border-brand-brown/10 object-cover group-hover:scale-105 transition-transform"
+                            width={96}
+                            height={96}
+                            className="rounded-xl border border-brand-brown/10 object-cover group-hover:scale-105 transition-transform"
                           />
                           <span className="absolute inset-0 rounded-xl bg-brand-brown/0 group-hover:bg-brand-brown/10 transition-colors flex items-center justify-center">
                             <QrCode size={20} className="text-white opacity-0 group-hover:opacity-100" />
@@ -334,31 +339,33 @@ export default function CheckoutModal({
             className="fixed inset-0 z-[70] bg-brand-brown/50 backdrop-blur-sm flex items-center justify-center p-6"
             onClick={() => setShowQRIS(false)}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="bg-white rounded-3xl shadow-2xl p-6 max-w-sm w-full text-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="font-serif text-lg font-bold text-brand-brown">
-                  Pembayaran QRIS
-                </h4>
-                <button
-                  onClick={() => setShowQRIS(false)}
-                  className="w-8 h-8 rounded-full bg-brand-light-cream text-brand-gray flex items-center justify-center hover:bg-brand-brown/10 transition-colors"
-                >
-                  <X size={15} />
-                </button>
-              </div>
-              <img
-                src={PAYMENT_METHODS.qris.imagePath}
-                alt="QRIS It's Tasty"
-                className="w-56 h-56 sm:w-64 sm:h-64 mx-auto rounded-2xl border border-brand-brown/10 object-cover"
-              />
-              <p className="text-sm text-brand-gray mt-4 leading-relaxed">
+<motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="bg-white rounded-3xl shadow-2xl p-6 max-w-sm w-full text-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="font-serif text-lg font-bold text-brand-brown">
+                    Pembayaran QRIS
+                  </h4>
+                  <button
+                    onClick={() => setShowQRIS(false)}
+                    className="w-8 h-8 rounded-full bg-brand-light-cream text-brand-gray flex items-center justify-center hover:bg-brand-brown/10 transition-colors"
+                  >
+                    <X size={15} />
+                  </button>
+                </div>
+                <Image
+                  src={PAYMENT_METHODS.qris.imagePath}
+                  alt="QRIS It's Tasty"
+                  width={224}
+                  height={224}
+                  className="mx-auto rounded-2xl border border-brand-brown/10 object-cover"
+                />
+                <p className="text-sm text-brand-gray mt-4 leading-relaxed">
                 Scan QRIS di atas dengan aplikasi pembayaran (GoPay, OVO, DANA,
                 ShopeePay, atau mobile banking) lalu konfirmasi pembayaran via
                 WhatsApp.

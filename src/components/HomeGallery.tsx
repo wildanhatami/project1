@@ -2,6 +2,7 @@
 
 import { motion, Variants } from "framer-motion";
 import { Product } from "@/lib/notion";
+import Image from "next/image";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -92,12 +93,13 @@ export default function HomeGallery({ products }: { products: Product[] }) {
                   Terlaris
                 </div>
               )}
-              <div className={`overflow-hidden rounded-xl md:rounded-2xl w-full ${idx === 0 ? "aspect-[4/3]" : "aspect-square"} bg-brand-brown/5`}>
-                <img 
-                  src={product.image || "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop"} 
-                  alt={product.name} 
-                  loading="eager"
+<div className={`overflow-hidden rounded-xl md:rounded-2xl w-full ${idx === 0 ? "aspect-[4/3]" : "aspect-square"} bg-brand-brown/5 relative`}>
+                <Image
+                  src={product.image || "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop"}
+                  alt={product.name}
+                  fill
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className="text-center md:text-left px-1">
@@ -123,12 +125,13 @@ export default function HomeGallery({ products }: { products: Product[] }) {
                   Terlaris
                 </div>
               )}
-              <div className={`overflow-hidden rounded-xl md:rounded-2xl w-full ${idx === 0 ? "aspect-square" : "aspect-[4/3]"} bg-brand-brown/5`}>
-                <img 
-                  src={product.image || "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop"} 
-                  alt={product.name} 
-                  loading="eager"
+<div className={`overflow-hidden rounded-xl md:rounded-2xl w-full ${idx === 0 ? "aspect-square" : "aspect-[4/3]"} bg-brand-brown/5 relative`}>
+                <Image
+                  src={product.image || "https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop"}
+                  alt={product.name}
+                  fill
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className="text-center md:text-left px-1">

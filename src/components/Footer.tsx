@@ -1,6 +1,5 @@
-"use client";
-
 import { MapPin } from "lucide-react";
+import { STORE_ADDRESS, STORE_MAPS_URL } from "@/lib/store-config";
 
 const InstagramIcon = ({ size = 16, className = "" }: { size?: number; className?: string }) => (
   <svg 
@@ -44,10 +43,10 @@ export default function Footer() {
         {/* Social Links & Location Pills */}
         <div className="flex flex-wrap items-center justify-center gap-3">
           <a
-            href="https://maps.app.goo.gl/bXF7b72Saev6xNsz9"
+            href={STORE_MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            title="Jl. Ahmad Yani Kp. Sarakan, 003, RT.002, Pisangan Jaya, Kec. Sepatan, Kabupaten Tangerang, Banten 15520"
+            title={STORE_ADDRESS}
             className="flex items-center gap-2 bg-white border border-brand-brown/10 hover:border-brand-terracotta/40 text-brand-brown hover:text-brand-terracotta px-4 py-2 rounded-full text-xs font-medium transition-all hover:scale-105 shadow-xs"
           >
             <MapPin size={15} className="text-brand-terracotta shrink-0" />
