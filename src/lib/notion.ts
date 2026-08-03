@@ -20,6 +20,15 @@ export interface Product {
   sizes: SizeOption[];
 }
 
+export interface Testimonial {
+  id: string;
+  name: string;
+  avatar: string;
+  rating: number;
+  text: string;
+  product: string;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapPageToProduct(page: any): Product {
   const properties = page.properties;
@@ -152,7 +161,7 @@ export async function updateProduct(
     const properties: Record<string, any> = {};
 
     if (data.description !== undefined) {
-      properties.Description = {
+      properties.deskripsi = {
         rich_text: data.description
           ? [{ text: { content: data.description } }]
           : [],
@@ -240,6 +249,33 @@ export async function uploadProductImage(
   }
 }
 
+function mapPageToTestimonial(page: any): Testimonial {
+  const properties = page.properties;
+
+  const name = properties.Name?.title?.[0]?.plain_text || "Anonymous";
+  const review = properties.Review?.rich_text?.[0]?.plain_text || "";
+  const rating = properties.Rating?.number ?? 5;
+
+  let avatar = "";
+  const avatarFiles = properties.Avatar?.files || [];
+  if (avatarFiles.length > 0) {
+    if (avatarFiles[0].type === "external") {
+      avatar = avatarFiles[0].external.url;
+    } else if (avatarFiles[0].type === "file") {
+      avatar = avatarFiles[0].file.url;
+    }
+  }
+
+  return {
+    id: page.id,
+    name,
+    avatar,
+    rating: Math.min(5, Math.max(1, rating)),
+    text: review,
+    product: properties.Product?.rich_text?.[0]?.plain_text || "",
+  };
+}
+
 /**
  * Hapus produk dari katalog dengan mengarsipkan halaman di Notion.
  */
@@ -255,6 +291,52 @@ export async function deleteProduct(
   } catch (error) {
     console.error("[notion] deleteProduct error:", error);
     return { ok: false, error: errorMessage(error, "Gagal menghapus produk") };
+  }
+}
+
+/**
+ * Ambil testimoni aktif dari database Notion.
+ */
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const databaseId = process.env.NOTION_TESTIMONIALS_DATABASE_ID;
+  if (!databaseId) {
+    console.error("NOTION_TESTIMONIALS_DATABASE_ID is not defined.");
+    return [];
+  }
+
+  try {
+    const response = await notion.dataSources.query({
+      data_source_id: databaseId,
+      filter: {
+        property: "IsActive",
+        checkbox: {
+          equals: true,
+        },
+      },
+    });
+
+    return response.results.map(mapPageToTestimonial);
+  } catch (error) {
+    console.error("Failed to fetch testimonials from Notion:", error);
+    return [];
+  }
+}
+
+/**
+ * Hapus testimoni dari database dengan mengarsipkan halaman di Notion.
+ */
+export async function deleteTestimonial(
+  pageId: string
+): Promise<{ ok: boolean; error?: string }> {
+  try {
+    await notion.pages.update({
+      page_id: pageId,
+      archived: true,
+    });
+    return { ok: true };
+  } catch (error) {
+    console.error("[notion] deleteTestimonial error:", error);
+    return { ok: false, error: errorMessage(error, "Gagal menghapus testimoni") };
   }
 }
 
@@ -293,7 +375,7 @@ export async function createProduct(
     };
 
     if (data.description) {
-      properties.Description = {
+      properties.deskripsi = {
         rich_text: [{ text: { content: data.description } }],
       };
     }
@@ -310,20 +392,19 @@ export async function createProduct(
     }
 
     const response = await notion.pages.create({
-      parent: { data_source_id: databaseId },
+      parent: { type: 'data_source_id', data_source_id: databaseId },
       properties,
     });
 
-    // Jika ada gambar, upload setelah halaman dibuat
+    // Jika ada gambar, upload langsung ke halaman yang baru dibuat
     if (data.image && response.id) {
-      const formData = new FormData();
-      formData.append("file", data.image);
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/admin/products/${response.id}/image`,
-        { method: "POST", body: formData }
-      );
-      if (!res.ok) {
-        console.warn("[notion] createProduct: gagal upload gambar, produk tetap dibuat");
+      const uploadRes = await uploadProductImage(response.id, {
+        name: data.image.name,
+        type: data.image.type,
+        data: data.image,
+      });
+      if (!uploadRes.ok) {
+        console.warn("[notion] createProduct: gagal upload gambar:", uploadRes.error);
       }
     }
 
@@ -331,5 +412,227 @@ export async function createProduct(
   } catch (error) {
     console.error("[notion] createProduct error:", error);
     return { ok: false, error: errorMessage(error, "Gagal membuat produk") };
+  }
+}
+
+export type OrderStatus = "Pending" | "Verified" | "Completed" | "Cancelled";
+
+export interface OrderItemInput {
+  productId: string;
+  productName: string;
+  size: string;
+  quantity: number;
+  price: number;
+}
+
+export interface Order {
+  id: string;
+  customerName: string;
+  customerEmail: string;
+  items: OrderItemInput[];
+  totalAmount: number;
+  status: OrderStatus;
+  paymentProofUrl: string;
+  orderMethod: string;
+  paymentMethod: string;
+  createdAt: string;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapPageToOrder(page: any): Order {
+  const props = page.properties;
+
+  const customerName = props.CustomerName?.title?.[0]?.plain_text || "Pelanggan";
+  const customerEmail = props.CustomerEmail?.email || "";
+  const totalAmount = props.TotalAmount?.number || 0;
+  const status = (props.Status?.select?.name as OrderStatus) || "Pending";
+  const orderMethod = props.OrderMethod?.rich_text?.[0]?.plain_text || "";
+  const paymentMethod = props.PaymentMethod?.rich_text?.[0]?.plain_text || "";
+  const createdAt = props.CreatedAt?.date?.start || page.created_time || "";
+
+  let paymentProofUrl = "";
+  const proofFiles = props.PaymentProof?.files || [];
+  if (proofFiles.length > 0) {
+    if (proofFiles[0].type === "external") {
+      paymentProofUrl = proofFiles[0].external.url;
+    } else if (proofFiles[0].type === "file") {
+      paymentProofUrl = proofFiles[0].file.url;
+    }
+  }
+
+  let items: OrderItemInput[] = [];
+  const itemsJson = props.Items?.rich_text?.[0]?.plain_text;
+  if (itemsJson) {
+    try {
+      items = JSON.parse(itemsJson);
+    } catch {
+      // ignore
+    }
+  }
+
+  return {
+    id: page.id,
+    customerName,
+    customerEmail,
+    items,
+    totalAmount,
+    status,
+    paymentProofUrl,
+    orderMethod,
+    paymentMethod,
+    createdAt,
+  };
+}
+
+/**
+ * Ambil SEMUA pesanan dari Notion Orders Database.
+ */
+export async function getOrders(): Promise<Order[]> {
+  const databaseId = process.env.NOTION_ORDERS_DATABASE_ID;
+  if (!databaseId) return [];
+
+  try {
+    const response = await notion.dataSources.query({
+      data_source_id: databaseId,
+    });
+
+    return response.results.map(mapPageToOrder);
+  } catch (error) {
+    console.error("[notion] getOrders error:", error);
+    return [];
+  }
+}
+
+/**
+ * Update status pesanan di Notion.
+ */
+export async function updateOrderStatus(
+  orderId: string,
+  status: OrderStatus
+): Promise<{ ok: boolean; error?: string }> {
+  try {
+    await notion.pages.update({
+      page_id: orderId,
+      properties: {
+        Status: {
+          select: { name: status },
+        },
+      },
+    });
+    return { ok: true };
+  } catch (error) {
+    console.error("[notion] updateOrderStatus error:", error);
+    return { ok: false, error: errorMessage(error, "Gagal mengupdate status pesanan") };
+  }
+}
+
+export interface CreateOrderInput {
+  customerName: string;
+  customerEmail: string;
+  items: OrderItemInput[];
+  totalAmount: number;
+  orderMethod: string;
+  paymentMethod: string;
+  paymentProof?: File;
+}
+
+/**
+ * Buat pesanan baru & upload foto bukti bayar di Notion Orders Database.
+ */
+export async function createOrder(
+  data: CreateOrderInput
+): Promise<{ ok: boolean; id?: string; error?: string }> {
+  try {
+    const databaseId = process.env.NOTION_ORDERS_DATABASE_ID;
+    if (!databaseId) {
+      return { ok: false, error: "NOTION_ORDERS_DATABASE_ID tidak dikonfigurasi" };
+    }
+
+    const response = await notion.pages.create({
+      parent: { type: "data_source_id", data_source_id: databaseId },
+      properties: {
+        CustomerName: {
+          title: [{ text: { content: data.customerName } }],
+        },
+        CustomerEmail: {
+          email: data.customerEmail || null,
+        },
+        Items: {
+          rich_text: [{ text: { content: JSON.stringify(data.items) } }],
+        },
+        TotalAmount: {
+          number: data.totalAmount,
+        },
+        Status: {
+          select: { name: "Pending" },
+        },
+        OrderMethod: {
+          rich_text: [{ text: { content: data.orderMethod } }],
+        },
+        PaymentMethod: {
+          rich_text: [{ text: { content: data.paymentMethod } }],
+        },
+        CreatedAt: {
+          date: { start: new Date().toISOString() },
+        },
+      },
+    });
+
+    if (data.paymentProof && response.id) {
+      await uploadOrderPaymentProof(response.id, {
+        name: data.paymentProof.name,
+        type: data.paymentProof.type,
+        data: data.paymentProof,
+      });
+    }
+
+    return { ok: true, id: response.id };
+  } catch (error) {
+    console.error("[notion] createOrder error:", error);
+    return { ok: false, error: errorMessage(error, "Gagal membuat pesanan") };
+  }
+}
+
+/**
+ * Unggah bukti pembayaran ke properti PaymentProof di Notion page order.
+ */
+export async function uploadOrderPaymentProof(
+  orderId: string,
+  file: { name: string; type: string; data: Blob }
+): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const upload = await notion.fileUploads.create({
+      mode: "single_part",
+      filename: file.name,
+      content_type: file.type,
+    });
+
+    await notion.fileUploads.send({
+      file_upload_id: upload.id,
+      file: {
+        filename: file.name,
+        data: file.data,
+      },
+    });
+
+    await notion.pages.update({
+      page_id: orderId,
+      properties: {
+        PaymentProof: {
+          files: [
+            {
+              type: "file_upload",
+              file_upload: { id: upload.id },
+              name: file.name,
+            },
+          ],
+        },
+      },
+    });
+
+    return { ok: true };
+  } catch (error) {
+    console.error("[notion] uploadOrderPaymentProof error:", error);
+    return { ok: false, error: errorMessage(error, "Gagal mengunggah bukti bayar") };
   }
 }

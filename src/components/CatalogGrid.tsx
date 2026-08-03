@@ -14,7 +14,7 @@ const staggerContainer: Variants = {
   },
 };
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 8;
 
 export default function CatalogGrid({ products }: { products: Product[] }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,12 +42,12 @@ export default function CatalogGrid({ products }: { products: Product[] }) {
   return (
     <div className="w-full flex flex-col items-center">
       <motion.div 
-        className="w-full max-w-7xl px-4 md:px-16 grid grid-cols-2 gap-4 md:gap-12 gap-y-10 md:gap-y-20 mb-20"
+        className="w-full max-w-7xl px-4 md:px-8 lg:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 gap-y-10 lg:gap-y-12 mb-20"
         initial="hidden" animate="visible" variants={staggerContainer}
         key={currentPage} // This key forces framer-motion to re-animate when page changes
       >
-        {currentProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {currentProducts.map((product, idx) => (
+          <ProductCard key={product.id} product={product} isPriority={idx < 4} />
         ))}
       </motion.div>
 

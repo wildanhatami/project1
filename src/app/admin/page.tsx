@@ -1,12 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Package, Eye, EyeOff, Users, ArrowRight } from "lucide-react";
-import { getAllProducts } from "@/lib/notion";
+import { Package, Eye, EyeOff, Users, ShoppingBag, ArrowRight } from "lucide-react";
+import { getAllProducts, getOrders } from "@/lib/notion";
+import { getAllUsers } from "@/lib/notion-users";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const products = await getAllProducts();
+  const [products, users, orders] = await Promise.all([
+    getAllProducts(),
+    getAllUsers(),
+    getOrders(),
+  ]);
+
   const activeCount = products.filter((p) => p.isActive).length;
 
   const stats = [
@@ -23,14 +29,14 @@ export default async function AdminDashboard() {
       color: "bg-green-50 text-green-600",
     },
     {
-      label: "Produk Tersembunyi",
-      value: products.length - activeCount,
-      icon: EyeOff,
+      label: "Pesanan Masuk",
+      value: orders.length,
+      icon: ShoppingBag,
       color: "bg-amber-50 text-amber-600",
     },
     {
       label: "Pengguna Terdaftar",
-      value: "-",
+      value: users.length,
       icon: Users,
       color: "bg-blue-50 text-blue-600",
     },

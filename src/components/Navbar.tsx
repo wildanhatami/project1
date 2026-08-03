@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, MessageSquare, MapPin, LogOut, LayoutDashboard, User } from "lucide-react";
+import { Menu, X, MessageSquare, MapPin, LogOut, LayoutDashboard, User, ShoppingBag } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const InstagramIcon = ({ size = 14, className = "" }: { size?: number; className?: string }) => (
   <svg 
@@ -43,6 +44,7 @@ export default function Navbar() {
   const { data: session, status } = useSession();
   const isLoggedIn = status === "authenticated";
   const isAdmin = session?.user?.role === "admin";
+  const { getTotalItems, openCart } = useCart();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -110,6 +112,18 @@ export default function Navbar() {
         
         {/* Desktop Session / Auth */}
         <div className="hidden md:flex items-center gap-3 w-24 justify-end">
+          <button
+            onClick={openCart}
+            className="relative flex items-center gap-1.5 text-brand-brown hover:text-brand-terracotta transition-colors"
+            title="Keranjang"
+          >
+            <ShoppingBag size={18} />
+            {getTotalItems() > 0 && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand-terracotta text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                {getTotalItems()}
+              </span>
+            )}
+          </button>
           {isLoggedIn ? (
             <>
               {isAdmin && (
@@ -193,8 +207,25 @@ export default function Navbar() {
                 );
               })}
 
-              {/* WhatsApp Quick Action Button */}
-              <motion.div
+               {/* Cart Button */}
+               <motion.div
+                 initial={{ opacity: 0, y: 15 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 exit={{ opacity: 0, y: -10 }}
+                 transition={{ delay: links.length * 0.05 + 0.05, duration: 0.3, ease: "easeOut" }}
+                 className="pt-2 w-full max-w-xs"
+               >
+                 <button
+                   onClick={() => { closeMenu(); openCart(); }}
+                   className="w-full flex items-center justify-center gap-2 bg-brand-light-cream border border-brand-brown/15 text-brand-brown font-medium py-3 px-6 rounded-full transition-all shadow-sm active:scale-95 text-sm"
+                 >
+                   <ShoppingBag size={16} />
+                   <span>Keranjang ({getTotalItems()})</span>
+                 </button>
+               </motion.div>
+
+               {/* WhatsApp Quick Action Button */}
+               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}

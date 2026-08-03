@@ -7,10 +7,18 @@
   --color-brand-brown: #4A3B32;
   --color-brand-gray: #6B5E55;
   --color-brand-light-cream: #FAF6EE;
-  
+
   --font-serif: var(--font-playfair);
   --font-sans: var(--font-poppins);
   --font-signature: var(--font-signature);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100dvh;
 }
 
 body {

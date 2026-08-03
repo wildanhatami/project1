@@ -525,10 +525,9 @@ export default function ProductManagement({
                 <label className="block text-sm font-semibold text-brand-brown mb-1.5">
                   Foto Produk
                 </label>
-                <button
-                  type="button"
+                <div
                   onClick={() => createFileInputRef.current?.click()}
-                  className="w-full"
+                  className="w-full cursor-pointer"
                 >
                   {creating.imagePreview ? (
                     <div className="relative aspect-square max-w-xs mx-auto rounded-xl overflow-hidden bg-brand-brown/5">
@@ -541,9 +540,10 @@ export default function ProductManagement({
                       />
                       <button
                         type="button"
-                        onClick={() =>
-                          setCreating({ ...creating, image: null, imagePreview: null })
-                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCreating({ ...creating, image: null, imagePreview: null });
+                        }}
                         className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors"
                       >
                         <X size={14} />
@@ -558,7 +558,7 @@ export default function ProductManagement({
                       <span className="text-xs text-brand-gray">JPG, PNG, WebP, GIF (max 20MB)</span>
                     </div>
                   )}
-                </button>
+                </div>
                 <input
                   ref={createFileInputRef}
                   type="file"

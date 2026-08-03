@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Providers from "@/components/Providers";
+import CartModal from "@/components/CartModal";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -39,17 +40,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${poppins.variable} ${playfair.variable} ${sacramento.variable} antialiased`}>
-      <body className="min-h-screen flex flex-col font-sans text-brand-brown bg-brand-cream selection:bg-brand-terracotta selection:text-white">
+    <html lang="id" className={`${poppins.variable} ${playfair.variable} ${sacramento.variable} antialiased h-full`}>
+      <body className="min-h-[100dvh] flex flex-col font-sans text-brand-brown bg-brand-cream selection:bg-brand-terracotta selection:text-white m-0 p-0">
         <Providers>
           <Navbar />
 
           {/* Main Content */}
-          <main className="flex-grow">
+          <main className="flex-grow w-full">
             {children}
           </main>
 
           <Footer />
+          <CartModal />
         </Providers>
       </body>
     </html>

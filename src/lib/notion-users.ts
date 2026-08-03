@@ -93,6 +93,25 @@ export async function getOrCreateUser(data: {
   return createUser(data);
 }
 
+/**
+ * Ambil SEMUA user terdaftar di Notion Users Database — untuk dashboard admin.
+ */
+export async function getAllUsers(): Promise<NotionUser[]> {
+  const databaseId = process.env.NOTION_USERS_DATABASE_ID;
+  if (!databaseId) return [];
+
+  try {
+    const response = await notion.dataSources.query({
+      data_source_id: databaseId,
+    });
+
+    return response.results.map(mapNotionPageToUser);
+  } catch (error) {
+    console.error('[notion-users] getAllUsers error:', error);
+    return [];
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapNotionPageToUser(page: any): NotionUser {
   const props = page.properties;
